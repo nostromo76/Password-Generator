@@ -220,7 +220,8 @@ describe('Test password generator', () => {
     cy.get(':nth-child(1) > a > .fab').should('be.visible');
     cy.get(':nth-child(2) > a > .fab').should('be.visible');
     cy.get(':nth-child(3) > a > .fab').should('be.visible');
-    cy.get(':nth-child(4) > a > .fab').should('be.visible')
+    cy.get(':nth-child(4) > a > .fab').should('be.visible');
+    cy.get(':nth-child(5) > a > .fab').should('be.visible')
 
     cy.get('a').each(link => {
       if (link.prop('href')) {
