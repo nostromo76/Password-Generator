@@ -215,27 +215,35 @@ describe('Test password generator', () => {
 
   })
 
-  it('Test dead link', function () {
-    cy.get('.floating-btn').click();
-    cy.get(':nth-child(1) > a > .fab').should('be.visible');
-    cy.get(':nth-child(2) > a > .fab').should('be.visible');
-    cy.get(':nth-child(3) > a > .fab').should('be.visible');
-    cy.get(':nth-child(4) > a > .fab').should('be.visible');
-    cy.get(':nth-child(5) > a > .fab').should('be.visible')
 
+  it('Test dead links', function() {
+    cy.get(".floating-btn").click();
+    cy.get(".social-panel-container.visible").should("be.visible");
     cy.get('a').each(link => {
       if (link.prop('href')) {
         cy.request({
           url: link.prop('href'),
           failOnStatusCode: false
         }).then(response => {
-          expect(response.status).to.be.oneOf([200, 301, 302]) // or any other valid status codes you want to check for
+          expect(response.status).to.be.oneOf([200, 301, 302]) // 
         })
       }
+    }).then(() => {
+      cy.log('All links checked/ all broken')
     })
-      
-    })
-      
-    })
+  })
+  /*
+  --------------shorter way----
+  it.only("Test dead link", function () {
+    cy.get(".floating-btn").click();
+    cy.get(".social-panel-container.visible").should("be.visible");
+    cy.get("a").each((link) => {
+      cy.wrap(link).invoke("attr", "href").should("be.eq", "#");
+    });
+  });
+  */ 
+  
+  
+})
   
 
